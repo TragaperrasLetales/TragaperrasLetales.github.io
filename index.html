@@ -119,13 +119,13 @@
     </div>
   </div>
 
-  <!-- Modales -->
+  <!-- Modales (No aria-hidden, let Bootstrap handle it) -->
   <div class="modal fade" id="modal1" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><img src="img01.jpg" class="w-100" alt="Foto 01"></div></div></div>
-  <div class="modal fade" id="modal2" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><img src="img01.jpg" class="w-100" alt="Foto 02"></div></div></div>
-  <div class="modal fade" id="modal3" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><img src="img01.jpg" class="w-100" alt="Foto 03"></div></div></div>
-  <div class="modal fade" id="modal4" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><img src="img01.jpg" class="w-100" alt="Foto 04"></div></div></div>
-  <div class="modal fade" id="modal5" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><img src="img01.jpg" class="w-100" alt="Foto 05"></div></div></div>
-  <div class="modal fade" id="modal6" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><img src="img01.jpg" class="w-100" alt="Foto 06"></div></div></div>
+  <div class="modal fade" id="modal2" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><img src="img02.jpg" class="w-100" alt="Foto 02"></div></div></div>
+  <div class="modal fade" id="modal3" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><img src="img03.jpg" class="w-100" alt="Foto 03"></div></div></div>
+  <div class="modal fade" id="modal4" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><img src="img04.jpg" class="w-100" alt="Foto 04"></div></div></div>
+  <div class="modal fade" id="modal5" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><img src="img05.jpg" class="w-100" alt="Foto 05"></div></div></div>
+  <div class="modal fade" id="modal6" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><img src="img06.jpg" class="w-100" alt="Foto 06"></div></div></div>
 
   <!-- Sonidos -->
   <audio id="spinSound" src="https://www.soundjay.com/misc/sounds/slot-machine-1.mp3"></audio>
@@ -151,6 +151,7 @@
     let isTricked = false;
 
     function safePlay(audioElement) {
+      if (!audioElement) return;
       const promise = audioElement.play();
       if (promise !== undefined) {
         promise.catch(err => console.warn('Autoplay error:', err));
