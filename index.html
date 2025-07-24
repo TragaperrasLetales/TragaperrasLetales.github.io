@@ -119,7 +119,7 @@
     </div>
   </div>
 
-  <!-- Modales (No aria-hidden, let Bootstrap handle it) -->
+  <!-- Modales -->
   <div class="modal fade" id="modal1" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><img src="img01.jpg" class="w-100" alt="Foto 01"></div></div></div>
   <div class="modal fade" id="modal2" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><img src="img02.jpg" class="w-100" alt="Foto 02"></div></div></div>
   <div class="modal fade" id="modal3" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><img src="img03.jpg" class="w-100" alt="Foto 03"></div></div></div>
@@ -128,8 +128,9 @@
   <div class="modal fade" id="modal6" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><img src="img06.jpg" class="w-100" alt="Foto 06"></div></div></div>
 
   <!-- Sonidos -->
-  <audio id="spinSound" src="https://www.soundjay.com/misc/sounds/slot-machine-1.mp3"></audio>
-  <audio id="winSound" src="https://www.soundjay.com/human/sounds/applause-8.mp3"></audio>
+  <audio id="bgMusic" src="musica.mp3" loop></audio>
+  <audio id="spinSound" src="girar.mp3"></audio>
+  <audio id="winSound" src="aplausos.mp3"></audio>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
@@ -146,20 +147,25 @@
       document.getElementById('slot3')
     ];
 
+    const bgMusic = document.getElementById('bgMusic');
     const spinSound = document.getElementById('spinSound');
     const winSound = document.getElementById('winSound');
     let isTricked = false;
 
     function safePlay(audioElement) {
       if (!audioElement) return;
-      const promise = audioElement.play();
-      if (promise !== undefined) {
-        promise.catch(err => console.warn('Autoplay error:', err));
+      const playPromise = audioElement.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(err => console.warn('Audio autoplay blocked:', err));
       }
     }
 
+    window.addEventListener('DOMContentLoaded', () => {
+      safePlay(bgMusic); // música de fondo
+    });
+
     function spinSlots() {
-      safePlay(spinSound);
+      safePlay(spinSound); // sonido al girar
       slotEls.forEach(el => el.parentElement.classList.add('spinning'));
 
       setTimeout(() => {
@@ -182,7 +188,7 @@
 
         if (results[0] === results[1] && results[1] === results[2] && results[0] === slots[3]) {
           setTimeout(() => {
-            safePlay(winSound);
+            safePlay(winSound); // sonido de aplausos
             showModales();
           }, 300);
         }
